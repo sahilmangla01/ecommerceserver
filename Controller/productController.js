@@ -133,7 +133,9 @@ const setIncrease=async(req,res)=>{
         console.log(userId);
         const find=await User.findOne({_id:userId,'cart.productId':productId})
         const obj= find.cart.find(item=>item.productId.toString()===productId)
-        obj.quantity+=1
+        if(obj.quantity<obj.stock){
+            obj.quantity+=1
+        } 
         await find.save()
                 return res.status(200).send({msg:"product already exist in cart"})
     }
@@ -148,7 +150,9 @@ const setDecrease=async(req,res)=>{
         console.log(userId);
         const find=await User.findOne({_id:userId,'cart.productId':productId})
         const obj= find.cart.find(item=>item.productId.toString()===productId)
-        obj.quantity-=1
+        if(obj.quantity>1){
+            obj.quantity-=1;
+        }
         await find.save()
                 return res.status(200).send({msg:"product already exist in cart"})
     }
