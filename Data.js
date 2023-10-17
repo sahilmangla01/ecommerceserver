@@ -1986,6 +1986,7 @@ const Data = [
       description:
         "Experience the bliss of soothing audio with these top-notch 50 dB ANC earbuds. Equipped with a 12.4 mm Mega Titanising Driver, this earplug delivers full bass and brings out clear vocals. Combined with six microphone designs and AI algorithms, you get a remarkable sound pick up system that minimises the surrounding noise during calls. Get 7 hours of music time with just 10 minutes of charging and keep listening to your favourite music on the go. Loaded with interesting features like Dynamic Bass Boost capabilities, Dolby Atmos support, IPX5 water resistance and 45 ms Super Low Latency for quick responsiveness, this device will serve to be an amazing earbuds.",
       category: "accessories",
+      featured:true
       
       
      
@@ -2214,6 +2215,7 @@ const Data = [
       description:
         "Frequency: 2.4G Channel: 4CH Motor: 816 Coreless Motor Quadcopter Battery: 3.7V 1800mAh Lipo (Included) Transmitter Battery: 3x 1.5 AA Battery Flying time: 10-30 mins(Approx) Charging time: 100mins R/C Distance: 100m Color: Black Dual Camera: 1080P / 4K Quad's Size: 25*20*5.5 CM (the arms not folded) 12.5*8*5.5 CM (the arms folded) Function: Up/down, Forward/backward, Turn left/right, Sideward flight, 3-level flight speed, LED Light, Headless Mode, One Key Automatic Return, Altitude Hold Mode, WiFi FPV, Trajectory Flight, Feature: -Trajectory Flight. Draw a flight way on the screen, and the drone would conduct an autonomous flight along the designated way. -2.4GHz Technology Adopted for Anti-Interference. -4 Channel which can ascend, descend, forward, backward, left sideward fly, right sideward fly, and rolling 360°. -6-axis gyro which can have more stable flying and be easy to control. ",
       category: "accessories",
+      featured:true
       
       
       
@@ -2447,6 +2449,7 @@ const Data = [
         "Feel the depth of sound in 180 watts of immersive cinematic surround sound with the Fort S180 Soundbar. Delve deep into the world of audio delight with your personal home theatre 2.1 channel with Bluetooth & bass. With 2 in-built full-range speakers and 1 external sub-woofer, bridge the gap between theatre and home with a soundbar that resonates with unparalleled intensity. The soundbar speakers are crafted to add substance to your space. The iconic design with its wall-mounted feature and true rich tones helps this sound system for home to blend with your space seamlessly. The soundbar allows you to adapt effortlessly to your choice of entertainment via 'Multiple EQ Modes' by simply tapping on your Mivi remote",
       category: "accessories", 
       
+      
      
     },{
       id: "68",
@@ -2557,6 +2560,7 @@ const Data = [
       description:
         "Wireless music streaming via Bluetooth. The PartyBox 110 comes with an Built-in Rechargeable battery that lets you play all night for an incredible 12 hours. The JBL PartyBox 110 is IPX4 splashproof so you never have to worry about the party getting too wet and wild With Colors synched to the Beat and with Customizable Strobes and Patterns that dazzle your eyes, party with an unique, immersive Audiovisual experience",
       category: "accessories",
+      featured:true
       
     },{
       id: "71",

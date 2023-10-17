@@ -7,6 +7,6 @@ const userSchema = new schema({
     lastName:{type:String, required:true},
     email:{type:String, required:true},
     password:{type:String, required:true},
-    cart:[{productId:String, quantity:Number , stock:Number , price:Number}]
+    cart:[  { productId: {type: mongoose.Schema.Types.ObjectId,ref: 'Product'}, quantity:Number,stock:Number }]
 })
 module.exports = mongoose.model("User",userSchema)

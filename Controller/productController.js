@@ -1,7 +1,7 @@
 const data = require('../Data')
 const productSchema = require('../Model/productModel')
 const User = require('../Model/userModel')
-
+const {createOrder} = require('../Paypal-api.js')
 
 async function addNewProduct(req,res){
         try{
@@ -92,14 +92,20 @@ const addToCart = async(req,res)=>{
 
  const displayCart =async(req,res)=>{
 
-    try{
-        const { userId  } = req.body
-        const user = await User.findById(userId)
-        res.send(user)
-    }
-    catch(err){
-        res.send("error occured", err)
-    }
+    try {
+        const userId=req.body.userId
+
+      const populatedCart=  await User.findById(userId)
+        .populate('cart.productId') // Populate the 'productId' field in the 'cart' array
+        
+                res.send({msg:"this is cart" ,user:populatedCart})
+              
+           
+        
+    } catch (e) {
+        res.status(500).send({ msg: e })  
+    }
+
 }
 
 const closeProduct=async(req,res)=>{
@@ -129,10 +135,11 @@ const closeProduct=async(req,res)=>{
 const setIncrease=async(req,res)=>{
     try{
         const { userId ,productId } = req.body
-        console.log(productId);
-        console.log(userId);
+        
         const find=await User.findOne({_id:userId,'cart.productId':productId})
         const obj= find.cart.find(item=>item.productId.toString()===productId)
+        
+       
         if(obj.quantity<obj.stock){
             obj.quantity+=1
         } 
@@ -161,6 +168,18 @@ const setDecrease=async(req,res)=>{
     }
 }
 
+const newOrder=async (req,res)=>{
+    try{
+        const { cart } = req.body;
+    const { jsonResponse, httpStatusCode } = await createOrder(cart);
+    res.status(httpStatusCode).json(jsonResponse);
+    }
+    catch (error) {
+            console.error("Failed to create order:", error);
+            res.status(500).json({ error: "Failed to create order." });
+          }
+}
 
 
-module.exports = {product ,singleProduct , categoryProduct, addNewProduct , companyProduct,addToCart , displayCart, closeProduct ,setIncrease,setDecrease}
+
+module.exports = {product ,singleProduct , categoryProduct, addNewProduct , companyProduct,addToCart , displayCart, closeProduct ,setIncrease,setDecrease , newOrder}
