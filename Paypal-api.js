@@ -119,4 +119,4 @@ async function handleResponse(response) {
 // });
 
 
-module.exports = { createOrder }
+module.exports = { createOrder,captureOrder }

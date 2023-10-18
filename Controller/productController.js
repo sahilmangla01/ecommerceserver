@@ -1,7 +1,7 @@
 const data = require('../Data')
 const productSchema = require('../Model/productModel')
 const User = require('../Model/userModel')
-const {createOrder} = require('../Paypal-api.js')
+const {createOrder, captureOrder} = require('../Paypal-api.js')
 
 async function addNewProduct(req,res){
         try{
@@ -180,6 +180,33 @@ const newOrder=async (req,res)=>{
           }
 }
 
+const capture = async(req,res)=>{
+    try {
+        const { orderID } = req.body;
+        const { jsonResponse, httpStatusCode } = await captureOrder(orderID);
+        res.status(httpStatusCode).json(jsonResponse);
+      } catch (error) {
+        console.error("Failed to create order:", error);
+        res.status(500).json({ error: "Failed to capture order." });
+      }
+}
+const placeOrder=async (req,res)=>{
+    try{
+        const userId=req.body.userId;  
+       const user= await User.findById(userId)
+         console.log(user.cart);
+       user.orderedProducts.push(...user.cart)
+       user.cart=[]
+       await user.save()
+     
+        res.send({user:user})
+
+       }
+    catch(err){
+        res.send('error occured' , err)
+    }
+
+}
 
 
-module.exports = {product ,singleProduct , categoryProduct, addNewProduct , companyProduct,addToCart , displayCart, closeProduct ,setIncrease,setDecrease , newOrder}
+module.exports = {product ,singleProduct , categoryProduct, addNewProduct , companyProduct,addToCart , displayCart, closeProduct ,setIncrease,setDecrease , newOrder, capture, placeOrder}
