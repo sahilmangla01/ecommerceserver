@@ -1,6 +1,6 @@
 const route = require('express').Router();
 const { register, loginUser } = require('../Controller/loginSignup');
-const {product, singleProduct,categoryProduct,addNewProduct, companyProduct , addToCart , displayCart,closeProduct,setIncrease, setDecrease,newOrder, capture,placeOrder} = require('../Controller/productController')
+const {product, singleProduct,categoryProduct,addNewProduct, companyProduct , addToCart , displayCart,closeProduct,setIncrease, setDecrease,newOrder,placeOrder} = require('../Controller/productController')
 
 route.get('/api/products' , product)
 route.get('/api/products/:id' , singleProduct)
@@ -19,7 +19,7 @@ route.post('/api/setIncrease' , setIncrease)
 route.post('/api/setDecrease' , setDecrease)   
 route.post('/api/place' , placeOrder)   
 route.post('/api/neworder',newOrder)
-route.post('/api/neworder/orderID  ',capture)
+
 
 
 module.exports = route

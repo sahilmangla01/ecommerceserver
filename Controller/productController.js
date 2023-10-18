@@ -1,7 +1,7 @@
 const data = require('../Data')
 const productSchema = require('../Model/productModel')
 const User = require('../Model/userModel')
-const {createOrder, captureOrder} = require('../Paypal-api.js')
+const Razorpay = require('razorpay')
 
 async function addNewProduct(req,res){
         try{
@@ -168,28 +168,43 @@ const setDecrease=async(req,res)=>{
     }
 }
 
-const newOrder=async (req,res)=>{
-    try{
-        const { cart } = req.body;
-    const { jsonResponse, httpStatusCode } = await createOrder(cart);
-    res.status(httpStatusCode).json(jsonResponse);
-    }
-    catch (error) {
-            console.error("Failed to create order:", error);
-            res.status(500).json({ error: "Failed to create order." });
-          }
-}
 
-const capture = async(req,res)=>{
-    try {
-        const { orderID } = req.body;
-        const { jsonResponse, httpStatusCode } = await captureOrder(orderID);
-        res.status(httpStatusCode).json(jsonResponse);
-      } catch (error) {
-        console.error("Failed to create order:", error);
-        res.status(500).json({ error: "Failed to capture order." });
-      }
-}
+
+const razorpay = new Razorpay({
+    key_id: 'rzp_test_5PB9AGsx0x9agg',
+    key_secret: '2I4UfNjZlVQfJHTcThve0TZN',
+})
+
+const newOrder=async (req,res)=>{
+    
+
+
+        const amount=req.body.amount
+    
+        const options = {
+            amount:amount,
+            currency: 'INR',
+            receipt: 'manglasahil9050@gmail.com',
+          
+        }
+    
+        try {
+            const response = await razorpay.orders.create(options);
+            res.send({
+                success:true,
+                msg:'Order Created',
+                order_id:response.id,
+                amount:options.amount,
+                key_id:'rzp_test_5PB9AGsx0x9agg'
+            });
+        } catch (error) {
+            console.error(error);
+            res.status(500).send('Internal Server Error');
+        }
+    }
+
+
+
 const placeOrder=async (req,res)=>{
     try{
         const userId=req.body.userId;  
@@ -209,4 +224,4 @@ const placeOrder=async (req,res)=>{
 }
 
 
-module.exports = {product ,singleProduct , categoryProduct, addNewProduct , companyProduct,addToCart , displayCart, closeProduct ,setIncrease,setDecrease , newOrder, capture, placeOrder}
+module.exports = {product ,singleProduct , categoryProduct, addNewProduct , companyProduct,addToCart , displayCart, closeProduct ,setIncrease,setDecrease , newOrder,  placeOrder}
